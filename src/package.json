@@ -1,8 +1,8 @@
 {
   "main": "app.html",
   "name": "Messenger",
-  "version": "1.5.0-beta.1",
-  "app-id": "com.aluxian.messengerfordesktop",
+  "version": "1.5.0",
+  "app-id": "com.sytten.messengerfordesktop",
   "chromium-args": "--disable-setuid-sandbox --js-flags=--harmony-proxies",
   "single-instance": true,
   "window": {
@@ -26,12 +26,12 @@
     "request": "^2.69.0",
     "semver": "^5.1.0"
   },
-  "manifestUrl": "https://raw.githubusercontent.com/Aluxian/Facebook-Messenger-Desktop/master/src/package.json",
-  "manifestUrlBeta": "https://raw.githubusercontent.com/Aluxian/Facebook-Messenger-Desktop/V1.5.X/src/package.json",
+  "manifestUrl": "https://raw.githubusercontent.com/Sytten/Facebook-Messenger-Desktop/master/src/package.json",
+  "manifestUrlBeta": "https://raw.githubusercontent.com/Sytten/Facebook-Messenger-Desktop/develop/src/package.json",
   "packages": {
-    "osx64": "https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.5.0-beta.1/Messenger_osx64_V150_beta1.dmg",
-    "win32": "https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.5.0-beta.1/Messenger_win32_V150_beta1.exe",
-    "linux32": "https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.5.0-beta.1/Messenger_linux32_V150_beta1.deb",
-    "linux64": "https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.5.0-beta.1/Messenger_linux64_V150_beta1.deb"
+    "osx64": "https://github.com/Sytten/Facebook-Messenger-Desktop/releases/download/v1.5.0/Messenger_osx64_V150.dmg",
+    "win32": "https://github.com/Sytten/Facebook-Messenger-Desktop/releases/download/v1.5.0/Messenger_win32_V150.exe",
+    "linux32": "https://github.com/Sytten/Facebook-Messenger-Desktop/releases/download/v1.5.0/Messenger_linux32_V150.deb",
+    "linux64": "https://github.com/Sytten/Facebook-Messenger-Desktop/releases/download/v1.5.0/Messenger_linux64_V150.deb"
   }
 }
