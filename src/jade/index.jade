@@ -38,33 +38,11 @@ html
     meta(property='og:type' content='website')
     meta(property='og:image' content='http://messengerfordesktop.com/img/preview.jpg')
     meta(property='og:url' content='http://messengerfordesktop.com')
-    meta(property='fb:admins' content='100000476749759')
-    meta(property='fb:app_id' content='1035250486503839')
-
-    meta(name='twitter:card' content='summary_large_image')
-    meta(name='twitter:creator' content='@aluxian')
-    meta(name='twitter:image' content='http://messengerfordesktop.com/img/preview.jpg')
-      
-    link(rel='canonical' href='http://messengerfordesktop.com')
-    script.
-      if (document.location.host == 'aluxian.github.io') {
-        document.location = 'http://messengerfordesktop.com';
-      }
       
     // inject:css
 
   body
-    
-    #fb-root
-    script.
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = '//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.3&appId=1035250486503839';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-      
+        
     section#header
       .container
         a.svg.logo(href='/')
@@ -201,29 +179,3 @@ html
         p.left No affiliation with Facebook. Some images taken from #[a(href='https://www.messenger.com/') messenger.com]
         p.right Created with &hearts; by #[a(href='http://www.aluxian.com/') Alexandru Rosianu] and maintained by #[a(href='http://www.github.com/Sytten') Emile Fugulin]        
     // inject:js
-    
-    //- Twitter
-    script.
-      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)
-      ?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+
-      '://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);
-      }}(document, 'script', 'twitter-wjs');
-    
-    //- GitHub
-    script(async defer id='github-bjs' src='https://buttons.github.io/buttons.js')
-      
-    //- HelloBar
-    script(async src='//my.hellobar.com/3227dce33fbac65d34ae12a646acb5813d715cc5.js')
-      
-    //- AddThis
-    script(async src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f3e264b364b047d')
-    
-    //- Google Analytics
-    script.
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-45600261-5', 'auto');
-      ga('send', 'pageview');
