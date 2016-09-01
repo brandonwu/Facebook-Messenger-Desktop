@@ -2,14 +2,22 @@ var Store = require('jfs');
 var path = require('path');
 var gui = window.require('nw.gui');
 
+// Proxy shim by @Swatinem
+// Fork @ nevercast/proxy#mfd
+var Proxy = require('harmony-proxy');
+
 var DEFAULT_SETTINGS = {
   launchOnStartup: false,
   checkUpdateOnLaunch: true,
   openLinksInBrowser: true,
   autoHideSidebar: false,
   asMenuBarAppOSX: false,
+  closeWithEscKey: false,
+  startMinimized: false,
+  blockSeen: false,
   windowState: {},
-  theme: 'default'
+  theme: 'default',
+  updateToBeta: false
 };
 
 var db = new Store(path.join(gui.App.dataPath, 'preferences.json'));
@@ -26,29 +34,30 @@ settings.watch = function(name, callback) {
 };
 
 // Save settings every time a change is made and notify watchers
-Object.observe(settings, function(changes) {
-  db.save('settings', settings, function(err) {
-    if (err) {
-      console.error('Could not save settings', err);
-    }
-  });
+var settings_proxy = new Proxy(settings, {
+    set: function(target, prop, value) {
+        Reflect.set(target, prop, value);
 
-  changes.forEach(function(change) {
-    var newValue = change.object[change.name];
-    var keyWatchers = watchers[change.name];
+        db.save('settings', settings, function(err) {
+          if (err) {
+            console.error('Could not save settings', err);
+          }
+        });
 
-    // Call all the watcher functions for the changed key
-    if (keyWatchers && keyWatchers.length) {
-      for (var i = 0; i < keyWatchers.length; i++) {
-        try {
-          keyWatchers[i](newValue);
-        } catch(ex) {
-          console.error(ex);
-          keyWatchers.splice(i--, 1);
+        var keyWatchers = watchers[prop];
+
+        // Call all the watcher functions for the changed key
+        if (keyWatchers && keyWatchers.length) {
+          for (var i = 0; i < keyWatchers.length; i++) {
+            try {
+              keyWatchers[i](value);
+            } catch(ex) {
+              console.error(ex);
+              keyWatchers.splice(i--, 1);
+            }
+          }
         }
-      }
     }
-  });
 });
 
 // Ensure the default values exist
@@ -58,4 +67,9 @@ Object.keys(DEFAULT_SETTINGS).forEach(function(key) {
   }
 });
 
-module.exports = settings;
+// Cross context settings manipulation.
+settings_proxy.updateKey = function(key, value) {
+	settings_proxy[key] = value;
+}
+
+module.exports = settings_proxy;
