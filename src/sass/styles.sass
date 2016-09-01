@@ -36,11 +36,19 @@ a.button
   text-transform: uppercase
 
   &.bordered
-    border: 1px solid $blue
-    color: $blue
+    &.white
+      border: 1px solid white
+      color: white
 
-    &:hover, &:focus
-      background: rgba(0, 132, 255, 0.03)
+      &:hover, &:focus
+        background: rgba(255, 255, 255, 0.1)
+
+    &.blue
+      border: 1px solid $blue
+      color: $blue
+
+      &:hover, &:focus
+        background: rgba(0, 132, 255, 0.03)
 
   &.filled
     @include transition(background-color 200ms)
@@ -200,7 +208,7 @@ section#contribute
         margin: 0
 
     @include media($desktop)
-      @include span-columns(3)
+      @include span-columns(4)
 
   li + li
     a
