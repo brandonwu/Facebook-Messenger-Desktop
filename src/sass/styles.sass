@@ -139,6 +139,9 @@ section#features
       box-shadow: rgba(0, 0, 0, 0.2) 0 0 3px 1px
 
 section#download
+  .subtitle
+    font-weight: inherit
+
   svg
     height: 20px
     margin-right: 5px
@@ -149,7 +152,7 @@ section#download
     bottom: -1px
 
   ul.container
-    max-width: 440px
+    max-width: 500px
   li
     @include span-columns(6)
     padding: 0 5px 20px
@@ -164,13 +167,26 @@ section#download
     font-size: 20px
 
 section#featured
-  li
-    @include media($desktop)
-      @include span-columns(4)
-
   li + li
     @include media($mobile)
       margin-top: 30px
+
+  ul + ul
+    @include media($mobile)
+      margin-top: 30px
+
+  ul.row1
+    @include media($desktop)
+      li
+        @include span-columns(4)
+
+  ul.row2
+    @include media($desktop)
+      @include shift(2)
+      padding-top: 60px
+
+      li
+        @include span-columns(5)
 
   svg
     height: 33px

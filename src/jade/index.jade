@@ -141,41 +141,70 @@ html
         h2.title Download
         
       ul.container
-        li: a.button.bordered(href='https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.4.3/Messenger.dmg')
+        li: a.button.bordered#fhosx(href='https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.4.3/Messenger.dmg' onclick="ga('send', 'event', {eventCategory: 'Download', eventAction: 'Mac', eventLabel: this.getAttribute('galabel')})" galabel='GitHub')
           span.osx
             include ../svg/apple.svg
             span OS X 10.7+
             
-        li: a.button.bordered(href='https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.4.3/MessengerSetup.exe')
+        li: a.button.bordered#fhwin(href='https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.4.3/MessengerSetup.exe' onclick="ga('send', 'event', {eventCategory: 'Download', eventAction: 'Windows', eventLabel: this.getAttribute('galabel')})" galabel='GitHub')
           span
             include ../svg/windows.svg
             span Windows
+            
+      .container
+        h3.subtitle Linux:
         
       ul.container
-        li: a.button.bordered(href='https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.4.3/Messenger_linux32.deb')
+        li: a.button.bordered(href='https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.4.3/Messenger_linux32.deb' onclick="ga('send', 'event', {eventCategory: 'Download', eventAction: 'Linux32DEB', eventLabel: 'GitHub'})")
           span
             include ../svg/debian.svg
-            span Linux 32
+            span DEB 32-bit
         
-        li: a.button.bordered(href='https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.4.3/Messenger_linux64.deb')
+        li: a.button.bordered(href='https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.4.3/Messenger_linux64.deb' onclick="ga('send', 'event', {eventCategory: 'Download', eventAction: 'Linux64DEB', eventLabel: 'GitHub'})")
           span
             include ../svg/debian.svg
-            span Linux 64
+            span DEB 64-bit
+
+      ul.container
+        li: a.button.bordered(href='https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.4.8/Messenger_linux32.rpm' onclick="ga('send', 'event', {eventCategory: 'Download', eventAction: 'Linux32RPM', eventLabel: 'GitHub'})")
+          span
+            include ../svg/rpm.svg
+            span RPM 32-bit
+        
+        li: a.button.bordered(href='https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.4.8/Messenger_linux64.rpm' onclick="ga('send', 'event', {eventCategory: 'Download', eventAction: 'Linux64RPM', eventLabel: 'GitHub'})")
+          span
+            include ../svg/rpm.svg
+            span RPM 64-bit
+
+      .container
+        p
+        a.link(href='https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/latest') Download from GitHub
+        p
+        a.link(href='https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/tag/v1.5.0-beta.1')
+          b Download Beta Releases
     
     section.blue#featured
       .container
         h2.title Featured on
         
-        ul
-          li
-            a(target='_blank' href='http://www.chip.de/downloads/Messenger-for-Desktop_78045560.html' title='CHIP')
-              include ../svg/chip.svg
+        ul.row1
           li
             a(target='_blank' href='http://www.producthunt.com/posts/messenger-for-desktop' title='ProductHunt')
               include ../svg/producthunt.svg
           li
+            a(target='_blank' href='http://www.chip.de/downloads/Messenger-for-Desktop_78045560.html' title='CHIP')
+              include ../svg/chip.svg
+          li
             a(target='_blank' href='http://messenger-for-desktop.en.softonic.com' title='Softonic')
-              img(src='img/softonic.png' width='153' height='33' alt='Softonic')
+              img(src='img/softonic.png' height='33' alt='Softonic')
+        
+        ul.row2
+          li
+            a(target='_blank' href='http://www.softpedia.com/get/Internet/Chat/Instant-Messaging/WhatsApp-for-Desktop.shtml' title='Softpedia')
+              img(src='img/softpedia.png' height='33' alt='Softpedia')
+          li
+            a(target='_blank' href='http://www.filehorse.com/download-messenger-for-desktop/?utm_medium=win&utm_source=messengerfordesktop.com&utm_campaign=MessengerForDesktop' title='FileHorse')
+              img(src='img/filehorse.png' height='33' alt='FileHorse')
     
     section#contribute
       .container
@@ -215,7 +244,7 @@ html
               href='https://twitter.com/share'
               data-size='large'
               data-url='http://messengerfordesktop.com/'
-              data-text='Beautiful Facebook Messenger client for Mac, Windows & Linux by @Aluxian'
+              data-text='Beautiful #Facebook #Messenger client for Mac, Windows & Linux by @Aluxian'
               data-related='Aluxian') Tweet
             
             a.github-button(
@@ -249,6 +278,12 @@ html
     
     //- GitHub
     script(async defer id='github-bjs' src='https://buttons.github.io/buttons.js')
+      
+    //- HelloBar
+    script(async src='//my.hellobar.com/3227dce33fbac65d34ae12a646acb5813d715cc5.js')
+      
+    //- AddThis
+    script(async src='//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f3e264b364b047d')
     
     //- Google Analytics
     script.
