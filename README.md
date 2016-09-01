@@ -1,14 +1,11 @@
 # Messenger for Desktop
+**If you like this fork, please consider giving me a star!**
 
-<!-- [(Looking for Maintainers)](https://github.com/Aluxian/Facebook-Messenger-Desktop/issues/407) -->
-
-[![Join the chat at gitter.im/Aluxian/Facebook-Messenger-Desktop](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Aluxian/Facebook-Messenger-Desktop?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Downloads](https://img.shields.io/github/downloads/Aluxian/Facebook-Messenger-Desktop/total.svg)](https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/latest)
-[![Still maintained?](https://img.shields.io/maintenance/yes/2016.svg)](https://github.com/Aluxian/Facebook-Messenger-Desktop/issues/407)
+[![Join the chat at gitter.im/Sytten/Facebook-Messenger-Desktop](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Sytten/Facebook-Messenger-Desktop?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Downloads](https://img.shields.io/github/downloads/Sytten/Facebook-Messenger-Desktop/total.svg)](https://github.com/Sytten/Facebook-Messenger-Desktop/releases/latest)
+[![Still maintained?](https://img.shields.io/maintenance/yes/2016.svg)](https://github.com/Sytten/Facebook-Messenger-Desktop/issues/52)
 
 Bring [messenger.com](https://messenger.com) to your OS X, Windows or Linux desktop. Built with [NW.js](http://nwjs.io/). Not affiliated with Facebook.
-
-***Please test the [beta](https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/tag/v1.5.0-beta.1) before reporting a new bug!***
 
 ![Cross-platform screenshot](screenshot.png)
 
@@ -79,17 +76,13 @@ Node runs on the background page, WebKit runs in the App page. You will need to 
 
 ## Contributions
 
-**Official maintainers**:
-* [Emile Fugulin](https://github.com/sytten)
-* [Josh Lloyd](https://github.com/nevercast)
-
-All contributions are welcome! For feature requests and bug reports please [submit an issue](https://github.com/Aluxian/Facebook-Messenger-Desktop/issues).
+All contributions are welcome! For feature requests and bug reports please [submit an issue](https://github.com/Sytten/Facebook-Messenger-Desktop/issues).
 
 ## License
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Alexandru Rosianu
+Copyright (c) 2016 Alexandru Rosianu (Original developer) & Emile Fugulin (Maintainer)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
