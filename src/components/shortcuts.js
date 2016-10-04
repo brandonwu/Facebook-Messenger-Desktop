@@ -5,13 +5,14 @@
 
 HELP_HTML = "List of shortcuts:\
 <br><br>\
-<b>Alt+Shift+C</b> &ndash; Compose new message<br>\
-<b>Alt+Shift+Q</b> &ndash; Search for people and groups<br>\
-<b>Alt+Shift+<i>n</i></b> &ndash; Jump to conversation <i>n</i>-th from top<br>\
-<b>Alt+Shift+Up</b>/<b>Down</b> &ndash; Jump to conversation one above/below<br><br>\
-<b>Alt+Shift+D</b> &ndash; Toggle conversation details<br>\
-<b>Alt+Shift+M</b> &ndash; Mute conversation<br><br>\
-<b>Alt+Shift+/</b> &ndash; Display this help dialog<br>\
+<b>Ctrl+N</b> &ndash; Compose [n]ew message<br>\
+<b>Ctrl+L</b> &ndash; Search conversation [l]ist<br>\
+<b>Ctrl+<i>n</i></b> &ndash; Jump to conversation <i>n</i>-th from top<br>\
+<b>Ctrl+Up</b>/<b>Ctrl+Down</b> &ndash; Jump to conversation one above/below<br><br>\
+<b>Ctrl+Tab</b>/<b>Ctrl+Shift+Tab</b> &ndash; Jump to conversation one above/below<br><br>\
+<b>Ctrl+I</b> &ndash; Toggle conversation [i]nfo<br>\
+<b>Ctrl+M</b> &ndash; [M]ute conversation<br><br>\
+<b>Ctrl+/</b> &ndash; Display this help dialog<br>\
 "
 
 /** Helper functions **/
@@ -106,8 +107,8 @@ module.exports = {
         return;
       }
 
-      // Only combinations of the form Alt+Shift+<key> are accepted
-      if (!(event.altKey && event.shiftKey)) {
+      // Only combinations of the form Ctrl+<key> are accepted
+      if (!(event.ctrlKey)) {
         return;
       }
 
@@ -118,18 +119,25 @@ module.exports = {
 
       // Other keys
       switch (event.keyCode) {
-          case 67:  // C
+          case 78:  // N
               compose(doc);
           break;
-          case 68:  // D
+          case 73:  // I
             toggleInfo(doc);
           break;
           case 77:  // M
               mute(doc);
-          break;    
-          case 81:  // Q
+          break;
+          case 76:  // L
               focusSearchBar();
-          break;    
+          break;
+          case 9: // tab
+              if (event.shiftKey) { // ctrl+shift+tab
+                verticalJump(doc, true);
+              } else {
+                verticalJump(doc, false);
+              }
+          break;
           case 38: // up arrow
               verticalJump(doc, true);
           break;

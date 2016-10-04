@@ -1,4 +1,4 @@
-﻿{
+{
   "main": "app.html",
   "name": "Messenger",
   "version": "1.5.0",
@@ -13,7 +13,9 @@
     "title": "Messenger",
     "icon": "images/icon.png",
     "toolbar": false,
-    "show": false
+    "show": false,
+    "frame": false,
+    "transparent": true
   },
   "webkit": {
     "plugin": true

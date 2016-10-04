@@ -485,7 +485,7 @@ module.exports = {
 		  // When we are not in the same context
 		  // The window is relative to screen position.
 		  // This is due to the hidden background page that exists at (0, 0).
-		  
+
 		  // Fixes #412
 		  x += win.x;
 		  y += win.y;
