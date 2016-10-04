@@ -111,7 +111,8 @@ module.exports = {
     var THEMES = {
       'default': 'Default',
       'mosaic': 'Mosaic',
-      'dark': 'Dark'
+      'dark': 'Dark',
+      'midnight': 'Midnight',
     };
 
     Object.keys(THEMES).forEach(function(key) {
