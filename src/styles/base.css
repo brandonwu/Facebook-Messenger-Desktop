@@ -14,3 +14,8 @@ line-height: 1.29;
 ._3058._15gf {
 max-width: 800px;
 }
+
+/* move the info/call/videocall left so close and minimize can fit */
+._fl2 {
+    right: 80px !important;
+}

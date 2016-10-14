@@ -25,15 +25,20 @@ module.exports = {
         win.reload();
       }
     }, {
-      label: 'Facebook',
+      type: 'separator'
+    }, {
+      label: 'Messenger',
       submenu: this.createFacebookMenu()
     }, {
       label: 'Application',
       submenu: this.createApplicationMenu()
     }, {
+      label: 'Network',
+      submenu: this.createNetworkMenu()
+    }, /*{
       label: 'Update',
       submenu: this.createUpdateMenu(keep)
-    }, {
+    },*/ {
       label: 'Visual',
       submenu: this.createVisualMenu(keep)
     },{
@@ -56,7 +61,7 @@ module.exports = {
       }
     }, {
       type: 'separator'
-    }, {
+    },/* {
       label: 'Check for Update',
       click: function() {
         updater.check(gui.App.manifest, function(error, newVersionExists, newManifest) {
@@ -70,7 +75,7 @@ module.exports = {
           }
         }, settings.updateToBeta);
       }
-    }, {
+    }, */{
       label: 'Launch Dev Tools',
       click: function() {
         win.showDevTools();
@@ -185,6 +190,51 @@ module.exports = {
     return menu;
   },
 
+  createNetworkMenu: function(keep) {
+    var menu = new gui.Menu();
+    menu.append(new gui.MenuItem({
+      type: 'checkbox',
+      label: 'Use Proxy to Connect',
+      setting: 'useProxy',
+      checked: settings.useProxy,
+      click: function() {
+        settings.useProxy = this.checked;
+        if (settings.useProxy) {
+          gui.App.setProxyConfig(settings.proxyString);
+        } else {
+          gui.App.setProxyConfig("");
+        }
+      }
+    }));
+
+    menu.append(new gui.MenuItem({
+      type: 'normal',
+      label: 'Configure Proxy',
+      setting: 'proxyString',
+      click: function() {
+        promptString = 'Enter the proxy string.\n\n' +
+                       'Examples:\n' +
+                       '   example.com:8888 - HTTP proxy\n' +
+                       '   socks4://example.com:8888 - SOCKS4 proxy\n' +
+                       '   socks5://example.com:8888 - SOCKS5 proxy';
+
+        var proxy = window.prompt(promptString, settings.proxyString);
+
+        if (proxy) {
+          settings.proxyString = proxy;
+        }
+
+        if (settings.useProxy) {
+          gui.App.setProxyConfig(settings.proxyString);
+        } else {
+          gui.App.setProxyConfig("");
+        }
+      }
+    }));
+
+    return menu;
+  },
+
   /**
    * Create the facebook settings menu
    */
@@ -261,7 +311,7 @@ module.exports = {
       click: function() {
         settings.startMinimized = this.checked;
       }
-    }))
+    }));
 
     menu.append(new gui.MenuItem({
       type: 'checkbox',
@@ -425,7 +475,7 @@ module.exports = {
   createContextMenu: function(win, window, document, targetElement) {
     var menu = new gui.Menu();
 
-    if (targetElement.tagName.toLowerCase() == 'input') {
+    if (targetElement.tagName.toLowerCase() == 'input' || targetElement.isContentEditable) {
       menu.append(new gui.MenuItem({
         label: "Cut",
         click: function() {
@@ -447,6 +497,14 @@ module.exports = {
           targetElement.value = clipboard.get();
         }
       }));
+
+      menu.append(new gui.MenuItem({
+        label: "Select All",
+        click: function() {
+          targetElement.focus();
+          targetElement.select();
+        }
+      }));
     } else if (targetElement.tagName.toLowerCase() == 'a') {
       menu.append(new gui.MenuItem({
         label: "Copy Link",
@@ -455,8 +513,33 @@ module.exports = {
           clipboard.set(url);
         }
       }));
+    } else if (targetElement.classList[0] == "_3xn1") {
+      menu.append(new gui.MenuItem({
+        label: "Copy Link",
+        click: function() {
+          var url = utils.skipFacebookRedirect(targetElement.parentNode.parentNode.href);
+          clipboard.set(url);
+        }
+      }));
+    } else if (targetElement.classList[0] == "__6m") {
+      menu.append(new gui.MenuItem({
+        label: "Copy Link",
+        click: function() {
+          var url = utils.skipFacebookRedirect(targetElement.parentNode.parentNode.parentNode.parentNode.href);
+          clipboard.set(url);
+        }
+      }));
+    } else if (targetElement.classList[0] == "_4ik4") {
+      menu.append(new gui.MenuItem({
+        label: "Copy Link",
+        click: function() {
+          var url = utils.skipFacebookRedirect(targetElement.parentNode.parentNode.parentNode.parentNode.parentNode.href);
+          clipboard.set(url);
+        }
+      }));
     } else {
-      var selection = window.getSelection().toString();
+      //window.alert(targetElement.classList);
+      var selection = document.getSelection().toString();
       if (selection.length > 0) {
         menu.append(new gui.MenuItem({
           label: "Copy",
@@ -466,6 +549,10 @@ module.exports = {
         }));
       }
     }
+
+    menu.append(new gui.MenuItem({
+      type: "separator"
+    }));
 
     this.settingsItems(win, false).forEach(function(item) {
       menu.append(item);
@@ -480,7 +567,7 @@ module.exports = {
   injectContextMenu: function(win, document) {
     document.body.addEventListener('contextmenu', function(event) {
       event.preventDefault();
-	  /*var x = event.x, y = event.y;
+	  var x = event.x, y = event.y;
 	  if(!utils.areSameContext(this, win)) {
 		  // When we are not in the same context
 		  // The window is relative to screen position.
@@ -490,8 +577,8 @@ module.exports = {
 		  x += win.x;
 		  y += win.y;
 	  }
-      this.createContextMenu(win, window, document, event.target).popup(x, y);*/
-      return false;
+      this.createContextMenu(win, window, document, event.target).popup(x, y);
+      // return false;
     }.bind(this));
   }
 };

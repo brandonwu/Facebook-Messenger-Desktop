@@ -31,6 +31,11 @@ if (settings.checkUpdateOnLaunch) {
   updater.checkAndPrompt(gui.App.manifest, win, settings.updateToBeta);
 }
 
+// Set proxy if requested
+if (settings.useProxy) {
+  gui.App.setProxyConfig(settings.proxyString);
+}
+
 // Run as menu bar app
 if (settings.asMenuBarAppOSX) {
   win.setShowInTaskbar(false);
@@ -60,8 +65,8 @@ iframe.onload = function() {
   notification.inject(iframe.contentWindow, win);
 
   // Add a context menu
-  menus.injectContextMenu(win, document);
-  //menus.injectContextMenu(win, iframe.contentDocument);
+  // menus.injectContextMenu(win, document);
+  menus.injectContextMenu(win, iframe.contentDocument);
 
   // Bind native events to the content window
   windowBehaviour.bindEvents(win, iframe.contentWindow);
@@ -71,7 +76,7 @@ iframe.onload = function() {
 
   // Listen for ESC key press
   windowBehaviour.closeWithEscKey(win, iframe.contentDocument);
-  
+
   // Listen for offline event and remove the iframe.
   dispatcher.addEventListener('offline', function() {
 	iframe = document.querySelector('iframe');
@@ -79,7 +84,7 @@ iframe.onload = function() {
 		iframe.remove();
 	}
   });
-  
+
   dispatcher.addEventListener('online', function() {
 	iframe = document.querySelector('iframe');
 	if(iframe) {

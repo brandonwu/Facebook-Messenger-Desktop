@@ -313,3 +313,24 @@ div._4-i2, div._5a8u, ._4t2a {
 ._17cj ._2ze8, ._17cj ._cen {
 	color: rgba(255, 255, 255, .6) !important;
 }
+
+/* Conversation find bar */
+._33p7 {
+	background-color: #1e1e1e;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* "Done" button */
+._3quh {
+	color: #eee !important;
+}
+
+/* "Load more" button border */
+._41jf {
+	border-color: #eee !important;
+}
+
+/*svg, svg[style] {
+	stroke: #eee !important;
+	fill: #eee !important;
+}*/

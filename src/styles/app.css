@@ -18,16 +18,91 @@ body {
   background-position: center;
 }
 
-.dragbar {
-  -webkit-app-region: drag;
+@media (max-width: 800px) {
+  .dragbar {
+    -webkit-app-region: drag;
+    position: absolute;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0);
+    top: 0;
+    width: calc(100% - 216px - 74px);
+    left: 74px;
+    z-index: -1000;
+  }
+}
+
+@media (min-width: 801px) {
+  .dragbar {
+    -webkit-app-region: drag;
+    position: absolute;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0);
+    top: 0;
+    /*width: calc(100% - 148px - 50px - 26px);*/
+    width: 144px;
+    left: 48px;
+    z-index: -1000;
+  }
+
+  .dragbar-right {
+    -webkit-app-region: drag;
+    position: absolute;
+    height: 50px;
+    width: 100;
+    background-color: rgba(0, 0, 0, 0);
+    top: 0;
+    width: calc(100% - 240px - 216px);
+    left: 240px;
+    z-index: -1000;
+  }
+}
+
+.osbuttons {
   position: absolute;
-  width: 100%;
+/*  width: 32px;*/
   height: 50px;
-  background-color: rgba(0, 0, 0, 0);
-  top: 0;
-  width: calc(100% - 148px - 40px);
-  left: 40px;
-  z-index: -1000;
+  right: 9px;
+  top: 9px;
+  z-index: 1000;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  vertical-align: middle;
+  line-height: 32px;
+  cursor: default;
+}
+
+.osbuttons li.close:hover {
+  background-color: rgba(232, 17, 35, 0.8);
+  transition: background-color .2s;
+}
+
+.osbuttons li.min:hover, .osbuttons li.max:hover {
+  background-color: rgba(26, 134, 219, 0.8);
+  transition: background-color .2s;
+}
+
+.osbuttons li.max .square{
+  display: none;
+  width: 32px;
+  height: 32px;
+  margin: auto;
+  border: 1px solid white;
+}
+
+.osbuttons li.max {
+  display: none;
+}
+
+.osbuttons li.restore {
+  display: none;
+}
+
+.osbuttons li {
+  /*background-color: rgba(0, 120, 215, 0.2);*/
+  transition: background-color .2s;
+  width: 36px;
+  margin-left: 0px;
+  display: inline-block;
 }
 
 iframe {

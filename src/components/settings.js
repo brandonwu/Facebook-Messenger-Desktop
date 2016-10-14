@@ -17,7 +17,9 @@ var DEFAULT_SETTINGS = {
   blockSeen: false,
   windowState: {},
   theme: 'default',
-  updateToBeta: false
+  updateToBeta: false,
+  useProxy: false,
+  proxyString: 'socks5://localhost:8888',
 };
 
 var db = new Store(path.join(gui.App.dataPath, 'preferences.json'));
