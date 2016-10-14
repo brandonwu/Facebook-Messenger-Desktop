@@ -19,6 +19,20 @@ module.exports = {
     });
   },
 
+  applyButtons: function(document) {
+    var buttonChange = function(theme) {
+      var el = document.getElementById('titlebuttons');
+      if (theme == "default") {
+        el.className = "osbuttons light";
+      } else {
+        el.className = "osbuttons dark";
+      }
+    }
+
+    buttonChange(settings.theme);
+    settings.watch('theme', buttonChange);
+  },
+
   /**
    * Load styles in the document..
    */

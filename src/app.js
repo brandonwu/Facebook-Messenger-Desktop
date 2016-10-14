@@ -60,6 +60,7 @@ var iframe = document.querySelector('iframe');
 iframe.onload = function() {
   // Load the theming module
   themer.apply(iframe.contentDocument);
+  themer.applyButtons(document);
 
   // Inject a callback in the notification API
   notification.inject(iframe.contentWindow, win);
