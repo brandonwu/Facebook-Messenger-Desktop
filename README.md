@@ -1,30 +1,30 @@
 # Messenger for Desktop
 **If you like this fork, please consider giving me a star!**
 
-[![Join the chat at gitter.im/Sytten/Facebook-Messenger-Desktop](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Sytten/Facebook-Messenger-Desktop?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Downloads](https://img.shields.io/github/downloads/Sytten/Facebook-Messenger-Desktop/total.svg)](https://github.com/Sytten/Facebook-Messenger-Desktop/releases/latest)
-[![Still maintained?](https://img.shields.io/maintenance/yes/2016.svg)](https://github.com/Sytten/Facebook-Messenger-Desktop/issues/52)
-
 Bring [messenger.com](https://messenger.com) to your OS X, Windows or Linux desktop. Built with [NW.js](http://nwjs.io/). Not affiliated with Facebook.
 
 ![Cross-platform screenshot](screenshot.png)
 
-## Features
+## Official Features Supported
 
 * Sounds *(can be disabled in settings)*
 * Desktop notifications *(enable them in settings)*
 * Voice and video calls
 
-## Extra
+## Extras
 
 * System tray icon
 * Special badge icon when new unread messages
 * Auto-launch on OS startup
 * Chrome notifications
-* 3 themes: Default, Dark and Mosaic
-* Auto-hide the left sidebar
+* Three themes to choose from: Dark, Mosaic, and Midnight
+* Proxy support
 * Open links in browser or new window
-* Preferences when the right-clicking the tray icon (Linux/Windows) or menu bar (OS X)
+* Preferences when the right-clicking the tray icon (Linux/Windows)
+* Don't send read receipts/typing notifications
+* Keyboard shortcuts for nearly everything - press `Ctrl+/` to see the list once you've downloaded it
+* Cool frameless look with window controls integrated
+* (in progress) Inline image expansion - hover or click on image links to open them quickly in Messenger
 
 ## Build
 
@@ -69,14 +69,14 @@ The output is in `./dist`. Take a look in `gulpfile.coffee` for additional tasks
 ## Debugging
 
 With the move to nw.js 0.14.x, Messenger for Desktop now runs as a Chrome Extension. Node and WebKit run in two different contexts. When debugging
-with DevTools, files that are `required()`'d will not be visible when running normally. 
+with DevTools, files that are `required()`'d will not be visible when running normally.
 
 Start Messenger for Desktop with `--remote-debugging-port=9999`. Then navigate to `http://localhost:9999/`. This will allow debugging of other contexts.
 Node runs on the background page, WebKit runs in the App page. You will need to set breakpoints in both if you wish to debug across them.
 
 ## Contributions
 
-All contributions are welcome! For feature requests and bug reports please [submit an issue](https://github.com/Sytten/Facebook-Messenger-Desktop/issues).
+All contributions are welcome! For feature requests and bug reports please [submit an issue](https://github.com/brandonwu/Facebook-Messenger-Desktop/issues).
 
 ## License
 
