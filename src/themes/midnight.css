@@ -200,6 +200,11 @@ body {
 	color: rgba(255, 255, 255, 0.4);
 }
 
+/* search header */
+._5t4c, ._225b {
+	background-color: #102030 !important;
+}
+
 /* contact list: searching text */
 ._4g0h {
 	color: rgba(255, 255, 255, 0.4);
@@ -274,7 +279,7 @@ body {
 ._1k1p ._5l38 {
 	border-top: none;
 }
-._5l37:active,
+/*._5l37:active,*/
 ._1k1p {
 	background-color: rgba(255, 255, 255, 0.05) !important;
 }
@@ -390,4 +395,16 @@ body {
 /* people list self online status */
 ._1u5d {
 	background-color: transparent !important;
+}
+
+/* convo info, user list */
+._4_j5, ._5l37 {
+	background-color: #192633 !important;
+}
+._4_j5 {
+	border-left: none !important;
+}
+/* convo name, mute label, user in user list, section headings */
+._2jnv, ._3szq, ._364g, ._1lj0, ._5rh4 {
+	color: #ddd !important;
 }
