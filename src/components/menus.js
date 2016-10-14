@@ -39,9 +39,9 @@ module.exports = {
       label: 'Update',
       submenu: this.createUpdateMenu(keep)
     },*/ {
-      label: 'Visual',
-      submenu: this.createVisualMenu(keep)
-    },{
+      label: 'Theme',
+      submenu: this.createThemesMenu(keep)
+    },/*{
       type: 'separator'
     }, {
       type: 'checkbox',
@@ -59,9 +59,7 @@ module.exports = {
           win.tray = null;
         }
       }
-    }, {
-      type: 'separator'
-    },/* {
+    },*//* {
       label: 'Check for Update',
       click: function() {
         updater.check(gui.App.manifest, function(error, newVersionExists, newManifest) {
@@ -75,12 +73,12 @@ module.exports = {
           }
         }, settings.updateToBeta);
       }
-    }, */{
+    }, *//*{
       label: 'Launch Dev Tools',
       click: function() {
         win.showDevTools();
       }
-    }].map(function(item) {
+    }*/].map(function(item) {
       // If the item has a 'setting' property, use some predefined values
       if (item.setting) {
         if (!item.hasOwnProperty('checked')) {
@@ -114,7 +112,7 @@ module.exports = {
   createThemesMenu: function(keep) {
     var menu = new gui.Menu();
     var THEMES = {
-      'default': 'Default',
+      'default': 'No Theme',
       'mosaic': 'Mosaic',
       'dark': 'Dark',
       'midnight': 'Midnight',
@@ -547,16 +545,18 @@ module.exports = {
             clipboard.set(selection);
           }
         }));
+      } else {
+        this.settingsItems(win, false).forEach(function(item) {
+          menu.append(item);
+        });
       }
     }
 
-    menu.append(new gui.MenuItem({
+/*    menu.append(new gui.MenuItem({
       type: "separator"
-    }));
+    }));*/
 
-    this.settingsItems(win, false).forEach(function(item) {
-      menu.append(item);
-    });
+
 
     return menu;
   },

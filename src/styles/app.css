@@ -58,6 +58,7 @@ body {
 }
 
 .osbuttons {
+  -webkit-user-select: none;
   position: absolute;
 /*  width: 32px;*/
   height: 50px;

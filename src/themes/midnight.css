@@ -368,11 +368,17 @@ body {
 	background-color: #0066aa !important;
 }
 
+/*Call/videocall/info buttons*/
 ._30yy svg[style] {
 	stroke: rgba(255, 255, 255, 0.7) !important;
 }
 
 /* emoji-only messages */
 ._hh7._2f5r, ._-5k ._hh7._2f5r {
+	background-color: transparent !important;
+}
+
+/* people list self online status */
+._1u5d {
 	background-color: transparent !important;
 }

@@ -12,7 +12,7 @@ gulp.task 'clean', ->
   shelljs.rm '-rf', './dist'
 
 # Build for each platform; on OSX/Linux, you need Wine installed to build win32 (or remove winIco below)
-['win32', 'win64', 'osx64', 'linux32', 'linux64'].forEach (platform) ->
+['win32', 'osx64', 'linux32', 'linux64'].forEach (platform) ->
   gulp.task 'build:' + platform, ->
     if process.argv.indexOf('--toolbar') > 0
       shelljs.sed '-i', '"toolbar": false', '"toolbar": true', './src/package.json'
@@ -20,7 +20,7 @@ gulp.task 'clean', ->
     nw = new NwBuilder(
       files: './src/**'
       zip: false
-      flavor: 'sdk'
+      flavor: 'normal'
       platforms: [platform]
       version: '0.14.5'
       winIco: if process.argv.indexOf('--noicon') > 0 then undefined else './assets-windows/icon.ico'
