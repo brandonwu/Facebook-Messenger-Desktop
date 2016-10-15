@@ -1,29 +1,26 @@
 # Messenger for Desktop
-**If you like this fork, please consider giving me a star!**
 
-Bring [messenger.com](https://messenger.com) to your OS X, Windows or Linux desktop. Built with [NW.js](http://nwjs.io/). Not affiliated with Facebook.
+Bring [messenger.com](https://messenger.com) to your OS X, Windows or Linux desktop. Built with [NW.js 14.5](http://nwjs.io/). Not affiliated with Facebook.
 
 ![Cross-platform screenshot](screenshot.png)
 
-## Official Features Supported
+## Features Supported (official)
 
 * Sounds *(can be disabled in settings)*
 * Desktop notifications *(enable them in settings)*
 * Voice and video calls
 
-## Extras
+## Extras (configurable)
 
+* Themes
+* Keyboard shortcuts for nearly everything - press `Ctrl+/` to see the full list
 * System tray icon
-* Special badge icon when new unread messages
-* Auto-launch on OS startup
-* Chrome notifications
-* Three themes to choose from: Dark, Mosaic, and Midnight
+* Start with OS
+* Desktop notification support
 * Proxy support
-* Open links in browser or new window
-* Preferences when the right-clicking the tray icon (Linux/Windows)
+* Open links in your default browser or a new window
 * Don't send read receipts/typing notifications
-* Keyboard shortcuts for nearly everything - press `Ctrl+/` to see the list once you've downloaded it
-* Cool frameless look with window controls integrated
+* Frameless look with integrated window controls
 * (in progress) Inline image expansion - hover or click on image links to open them quickly in Messenger
 
 ## Build
@@ -71,8 +68,7 @@ The output is in `./dist`. Take a look in `gulpfile.coffee` for additional tasks
 With the move to nw.js 0.14.x, Messenger for Desktop now runs as a Chrome Extension. Node and WebKit run in two different contexts. When debugging
 with DevTools, files that are `required()`'d will not be visible when running normally.
 
-Start Messenger for Desktop with `--remote-debugging-port=9999`. Then navigate to `http://localhost:9999/`. This will allow debugging of other contexts.
-Node runs on the background page, WebKit runs in the App page. You will need to set breakpoints in both if you wish to debug across them.
+In order to access devtools, you must be running with the `sdk` flavor of nwjs. Simply change the flavor in the nw-builder section of the gulpfile from `'normal'` to `'sdk'` and rebuild. Then, to find the devtools, right click on the window buttons in the top right to find `Inspect` and `Inspect background page`. If you would like to actually be able to right click elements and inspect them, comment out the custom context menu injection in `app.js`.
 
 ## Contributions
 
