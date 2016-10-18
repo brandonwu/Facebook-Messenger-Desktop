@@ -19,3 +19,7 @@ max-width: 800px;
 ._fl2 {
     right: 80px !important;
 }
+
+._4sp8 {
+    min-width: 0 !important;
+}

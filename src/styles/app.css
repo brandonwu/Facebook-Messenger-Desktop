@@ -48,7 +48,6 @@ body {
     -webkit-app-region: drag;
     position: absolute;
     height: 50px;
-    width: 100;
     background-color: rgba(0, 0, 0, 0);
     top: 0;
     width: calc(100% - 240px - 216px);

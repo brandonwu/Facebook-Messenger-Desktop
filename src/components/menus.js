@@ -473,37 +473,7 @@ module.exports = {
   createContextMenu: function(win, window, document, targetElement) {
     var menu = new gui.Menu();
 
-    if (targetElement.tagName.toLowerCase() == 'input' || targetElement.isContentEditable) {
-      menu.append(new gui.MenuItem({
-        label: "Cut",
-        click: function() {
-          clipboard.set(targetElement.value);
-          targetElement.value = '';
-        }
-      }));
-
-      menu.append(new gui.MenuItem({
-        label: "Copy",
-        click: function() {
-          clipboard.set(targetElement.value);
-        }
-      }));
-
-      menu.append(new gui.MenuItem({
-        label: "Paste",
-        click: function() {
-          targetElement.value = clipboard.get();
-        }
-      }));
-
-      menu.append(new gui.MenuItem({
-        label: "Select All",
-        click: function() {
-          targetElement.focus();
-          targetElement.select();
-        }
-      }));
-    } else if (targetElement.tagName.toLowerCase() == 'a') {
+  if (targetElement.tagName.toLowerCase() == 'a') {
       menu.append(new gui.MenuItem({
         label: "Copy Link",
         click: function() {
@@ -551,13 +521,6 @@ module.exports = {
         });
       }
     }
-
-/*    menu.append(new gui.MenuItem({
-      type: "separator"
-    }));*/
-
-
-
     return menu;
   },
 
@@ -566,7 +529,6 @@ module.exports = {
    */
   injectContextMenu: function(win, document) {
     document.body.addEventListener('contextmenu', function(event) {
-      event.preventDefault();
 	  var x = event.x, y = event.y;
 	  if(!utils.areSameContext(this, win)) {
 		  // When we are not in the same context
@@ -577,7 +539,12 @@ module.exports = {
 		  x += win.x;
 		  y += win.y;
 	  }
-      this.createContextMenu(win, window, document, event.target).popup(x, y);
+      if (event.target.isContentEditable || event.target.tagName.toLowerCase() == "input") {
+        return;
+      } else {
+        event.preventDefault();
+        this.createContextMenu(win, window, document, event.target).popup(x, y);
+      }
       // return false;
     }.bind(this));
   }

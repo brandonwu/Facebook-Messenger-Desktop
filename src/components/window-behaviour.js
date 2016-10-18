@@ -31,7 +31,7 @@ module.exports = {
 	// Allows menu item to dispatch a close event.
 	dispatcher.addEventListener('close', function(quit) {
 	  // Always save and hide
-	  this.saveWindowState(win);		
+	  this.saveWindowState(win);
 	  win.hide();
 	  // If we are quitting, close.
 	  if (quit) {
@@ -76,7 +76,8 @@ module.exports = {
         gui.Shell.openExternal(url);
         policy.ignore();
       } else {
-        policy.forceNewWindow();
+        // policy.forceNewWindow();
+        policy.setNewWindowManifest({"frame" : true});
       }
     });
   },
@@ -151,14 +152,14 @@ module.exports = {
           }
         }
 	  }
-	  
+
 	  if(label == lastLabel) {
-		  // The label is no different to the last time it was set 
+		  // The label is no different to the last time it was set
 		  // So don't bother invoking the win.set method.
 		  return;
 	  }
-	
-	  // Track the label for debouncing. 
+
+	  // Track the label for debouncing.
 	  lastLabel = label;
       win.setBadgeLabel(label);
 

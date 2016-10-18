@@ -101,7 +101,7 @@ iframe.onload = function() {
   dispatcher.trigger('online');
 
   // Inject keyboard shortcuts
-  shortcuts.inject(iframe.contentDocument);
+  shortcuts.inject(win, iframe.contentDocument);
 };
 
 
