@@ -514,6 +514,8 @@ module.exports = {
             clipboard.set(selection);
           }
         }));
+      } else {
+        return;
       }
     }
     return menu;
