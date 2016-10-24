@@ -473,7 +473,7 @@ module.exports = {
   createContextMenu: function(win, window, document, targetElement) {
     var menu = new gui.Menu();
 
-    if (targetElement.tagName.toLowerCase() == 'input') {
+    if (targetElement.tagName.toLowerCase() == 'input' || targetElement.isContentEditable) {
       menu.append(new gui.MenuItem({
         label: "Cut",
         click: function() {
@@ -503,8 +503,32 @@ module.exports = {
           clipboard.set(url);
         }
       }));
+    } else if (targetElement.classList[0] == "_3xn1") {
+      menu.append(new gui.MenuItem({
+        label: "Copy Link",
+        click: function() {
+          var url = utils.skipFacebookRedirect(targetElement.parentNode.parentNode.href);
+          clipboard.set(url);
+        }
+      }));
+    } else if (targetElement.classList[0] == "__6m") {
+      menu.append(new gui.MenuItem({
+        label: "Copy Link",
+        click: function() {
+          var url = utils.skipFacebookRedirect(targetElement.parentNode.parentNode.parentNode.parentNode.href);
+          clipboard.set(url);
+        }
+      }));
+    } else if (targetElement.classList[0] == "_4ik4") {
+      menu.append(new gui.MenuItem({
+        label: "Copy Link",
+        click: function() {
+          var url = utils.skipFacebookRedirect(targetElement.parentNode.parentNode.parentNode.parentNode.parentNode.href);
+          clipboard.set(url);
+        }
+      }));
     } else {
-      var selection = window.getSelection().toString();
+      var selection = document.getSelection().toString();
       if (selection.length > 0) {
         menu.append(new gui.MenuItem({
           label: "Copy",
@@ -514,6 +538,10 @@ module.exports = {
         }));
       }
     }
+
+    menu.append(new gui.MenuItem({
+      type: "separator"
+    }));
 
     this.settingsItems(win, false).forEach(function(item) {
       menu.append(item);
@@ -528,7 +556,7 @@ module.exports = {
   injectContextMenu: function(win, document) {
     document.body.addEventListener('contextmenu', function(event) {
       event.preventDefault();
-	  /*var x = event.x, y = event.y;
+	  var x = event.x, y = event.y;
 	  if(!utils.areSameContext(this, win)) {
 		  // When we are not in the same context
 		  // The window is relative to screen position.
@@ -538,8 +566,8 @@ module.exports = {
 		  x += win.x;
 		  y += win.y;
 	  }
-      this.createContextMenu(win, window, document, event.target).popup(x, y);*/
-      return false;
+      this.createContextMenu(win, window, document, event.target).popup(x, y);
+      // return false;
     }.bind(this));
   }
 };
