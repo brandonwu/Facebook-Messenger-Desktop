@@ -31,6 +31,9 @@ module.exports = {
       label: 'Application',
       submenu: this.createApplicationMenu()
     }, {
+      label: 'Network',
+      submenu: this.createNetworkMenu()
+    }, {
       label: 'Update',
       submenu: this.createUpdateMenu(keep)
     }, {
@@ -185,6 +188,51 @@ module.exports = {
     return menu;
   },
 
+  createNetworkMenu: function(keep) {
+    var menu = new gui.Menu();
+    menu.append(new gui.MenuItem({
+      type: 'checkbox',
+      label: 'Use Proxy to Connect',
+      setting: 'useProxy',
+      checked: settings.useProxy,
+      click: function() {
+        settings.useProxy = this.checked;
+        if (settings.useProxy) {
+          gui.App.setProxyConfig(settings.proxyString);
+        } else {
+          gui.App.setProxyConfig("");
+        }
+      }
+    }));
+
+    menu.append(new gui.MenuItem({
+      type: 'normal',
+      label: 'Configure Proxy',
+      setting: 'proxyString',
+      click: function() {
+        promptString = 'Enter the proxy string.\n\n' +
+                       'Examples:\n' +
+                       '   example.com:8888 - HTTP proxy\n' +
+                       '   socks4://example.com:8888 - SOCKS4 proxy\n' +
+                       '   socks5://example.com:8888 - SOCKS5 proxy';
+
+        var proxy = window.prompt(promptString, settings.proxyString);
+
+        if (proxy) {
+          settings.proxyString = proxy;
+        }
+
+        if (settings.useProxy) {
+          gui.App.setProxyConfig(settings.proxyString);
+        } else {
+          gui.App.setProxyConfig("");
+        }
+      }
+    }));
+
+    return menu;
+  },
+
   /**
    * Create the facebook settings menu
    */
@@ -261,7 +309,7 @@ module.exports = {
       click: function() {
         settings.startMinimized = this.checked;
       }
-    }))
+    }));
 
     menu.append(new gui.MenuItem({
       type: 'checkbox',
