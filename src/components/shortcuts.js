@@ -3,15 +3,21 @@
  * Source: https://github.com/guoguo12/messenger-shortcuts
  */
 
-HELP_HTML = "List of shortcuts:\
-<br><br>\
+HELP_HTML = "\
 <b>Ctrl+N</b> &ndash; Compose [n]ew message<br>\
 <b>Ctrl+L</b> &ndash; Search conversation [l]ist<br>\
-<b>Ctrl+<i>n</i></b> &ndash; Jump to conversation <i>n</i>-th from top<br>\
-<b>Ctrl+Up</b>/<b>Ctrl+Down</b> &ndash; Jump to conversation one above/below<br><br>\
-<b>Ctrl+Tab</b>/<b>Ctrl+Shift+Tab</b> &ndash; Jump to conversation one above/below<br><br>\
 <b>Ctrl+I</b> &ndash; Toggle conversation [i]nfo<br>\
+<b>Ctrl+F</b> &ndash; [F]ind in conversation history<br>\
+<b>Ctrl+G</b> &ndash; [G]o up in history search results<br>\
+<b>Ctrl+Shift+G</b> &ndash; [G]o down in history search results<br>\
+<b>Ctrl+D</b> &ndash; Open the context menu for the current conversation<br>\
+<b>Ctrl+P</b> &ndash; Open the Messenger settings menu<br>\
+<b>Ctrl+G, E, S</b> &ndash; Send a GIF, emoji, or sticker<br>\
+<b>Ctrl+Enter</b> &ndash; Send a like<br>\
 <b>Ctrl+M</b> &ndash; [M]ute conversation<br><br>\
+<b>Ctrl+Space</b> &ndash; Jump to the first conversation with unread messages<br>\
+<b>Ctrl+<i>n</i></b> &ndash; Jump to conversation <i>n</i>-th from top<br>\
+<b>Ctrl+Tab</b>/<b>Ctrl+Shift+Tab</b> &ndash; Jump to conversation one above/below<br>\
 <b>Ctrl+/</b> &ndash; Display this help dialog<br>\
 "
 
@@ -21,28 +27,18 @@ function getByAttr(doc, tag, attr, value) {
   return doc.querySelector(tag + '[' + attr + '="' + value + '"]');
 }
 
-function last(arr) {
-  return arr.length === 0 ? undefined : arr[arr.length - 1];
-}
-
-
 /** Functionality **/
+
+function contextForMessage(doc, index) {
+  doc.querySelectorAll('div[aria-label="Conversations"]')[index].click();
+}
 
 function jumpToMessage(doc, index) {
   doc.querySelectorAll('div[aria-label="Conversations"] a')[index].click();
 }
 
 function verticalJump(doc, isUp) {
-  console.log('hello');
-  var conversations = doc.querySelectorAll('[aria-label="Conversation List"] li');
-  console.log(conversations);
-  for (var i = 0; i < conversations.length; i++) {
-    console.log("jump "+i);
-    if (conversations[i].getAttribute('aria-relevant')) {
-      jumpToMessage(doc, i + (isUp ? -1 : 1));
-      return;
-    }
-  }
+  jumpToMessage(doc, getCurrentConversationIndex(doc) + (isUp ? -1 : 1));
 }
 
 function selectFirstSearchResult(doc) {
@@ -75,12 +71,45 @@ function focusSearchBar(doc) {
 }
 
 function focusMessageInput(doc) {
+  //if (doc.activeElement.placeholder == "Search messages") {
+  if (doc.getElementsByClassName('_33p7').length != 0) {//If search is open, close it.
+    clickConvSearch(doc);
+  }
   doc.querySelector('div[role="main"] div[role="textbox"]').click();
 }
 
-function openDeleteDialog(doc) {
-  last(doc.querySelectorAll('div.contentAfter div[aria-label="Conversation actions"]')).click();
-  doc.querySelector('a[role="menuitem"] span span').click();
+function getCurrentConversationIndex(doc) {
+  var conversations = doc.querySelectorAll('[aria-label="Conversation List"] li');
+
+  for (var i = 0; i < conversations.length; i++) {
+    if (conversations[i].getAttribute('aria-relevant') && !conversations[i].getAttribute('aria-live')) {
+      return i;
+    }
+  }
+}
+
+function jumpToNewestWithUnread(doc) {
+  var i = getNewestConversationWithUnread(doc);
+  if (i != null) {
+    jumpToMessage(doc, i);
+  }
+}
+
+function getNewestConversationWithUnread(doc) {
+  var conversations = doc.querySelectorAll('[aria-label="Conversation List"] li');
+
+  for (var i = 0; i < conversations.length; i++) {
+    if (conversations[i].getAttribute('aria-live')) {
+      return i;
+    }
+  }
+
+  return null;
+}
+
+function getCurrentConversationContextMenu(doc) {
+  doc.querySelectorAll('div.contentAfter div[aria-label="Conversation actions"]')[getCurrentConversationIndex(doc)].click();
+  // doc.querySelector('a[role="menuitem"] span span').click();
 }
 
 function openHelp(doc) {
@@ -90,6 +119,41 @@ function openHelp(doc) {
     doc.querySelector('div[role="dialog"] h2~div').innerHTML = HELP_HTML;
     doc.querySelector('div[role="dialog"] h2~div~div').remove();
   }, 100);
+}
+
+function settingsMenu(doc) {
+  getByAttr(doc, 'a', 'aria-label', 'Settings, privacy policy, help and more').click();
+}
+
+function clickConvSearch(doc) {
+  doc.getElementsByClassName('_3szq')[3].click();
+}
+
+function searchConversation(doc) {
+  if (doc.getElementsByClassName('_30vt').length != 0) {
+    var a = getByAttr(doc, 'input', 'placeholder', 'Search messages');
+    if (doc.activeElement.placeholder == 'Search messages') {
+      focusMessageInput(doc);
+    } else {
+      a.focus();
+    }
+  } else {
+    clickConvSearch(doc);
+  }
+}
+
+function prevConvSearchResult(doc) {
+  if (doc.getElementsByClassName('_3jv8').length != 0) {// "n of n results" text
+    getByAttr(doc, 'button', 'aria-label', 'Previous result').click();
+  } else {
+    getByAttr(doc, 'a', 'title', 'Choose a gif or sticker').click();
+  }
+}
+
+function nextConvSearchResult(doc) {
+  if (doc.getElementsByClassName('_3jv8').length != 0) {
+    getByAttr(doc, 'button', 'aria-label', 'Next result').click();
+  }
 }
 
 module.exports = {
@@ -119,6 +183,37 @@ module.exports = {
 
       // Other keys
       switch (event.keyCode) {
+          case 32:  // space
+              jumpToNewestWithUnread(doc);
+          break;
+          // case 82:  // R
+          //     window.reload();
+          // break;
+          case 13:  // Enter
+              getByAttr(doc, 'a', 'aria-label', "Send a Like").click();
+          break;
+          case 80:  // P
+              settingsMenu(doc);
+          break;
+          case 69:  // E
+              getByAttr(doc, 'a', 'title', 'Choose an emoji').click();
+          break;
+          case 71:  // G
+              if (event.shiftKey) { // ctrl+shift+g
+                nextConvSearchResult(doc);
+              } else {
+                prevConvSearchResult(doc);
+              }
+          break;
+          case 70:  // F
+              searchConversation(doc);
+          break;
+          case 83:  // S
+              getByAttr(doc, 'a', 'title', 'Choose a sticker').click();
+          break;
+          case 68:  // D
+              getCurrentConversationContextMenu(doc);
+          break;
           case 78:  // N
               compose(doc);
           break;
@@ -129,7 +224,7 @@ module.exports = {
               mute(doc);
           break;
           case 76:  // L
-              focusSearchBar();
+              focusSearchBar(doc);
           break;
           case 9: // tab
               if (event.shiftKey) { // ctrl+shift+tab
