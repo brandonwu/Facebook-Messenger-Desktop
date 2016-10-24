@@ -145,8 +145,6 @@ function searchConversation(doc) {
 function prevConvSearchResult(doc) {
   if (doc.getElementsByClassName('_3jv8').length != 0) {// "n of n results" text
     getByAttr(doc, 'button', 'aria-label', 'Previous result').click();
-  } else {
-    getByAttr(doc, 'a', 'title', 'Choose a gif or sticker').click();
   }
 }
 
@@ -157,18 +155,38 @@ function nextConvSearchResult(doc) {
 }
 
 module.exports = {
-  inject: function(doc) {
+  inject: function(win, doc) {
     doc.body.onkeydown = function(event) {
       // Escape key
       if (event.keyCode === 27) {
         focusMessageInput(doc);
       }
 
-      if (event.keyCode == 13 && doc.activeElement === getSearchBar(doc)) {
-        // we're going to change the input, so throw away this keypress
-        event.preventDefault();
-        selectFirstSearchResult(doc);
-        return;
+      if (event.keyCode == 33 || event.keyCode == 34) {
+        msg = getByAttr(doc, 'div', 'aria-label', 'Messages').parentNode.parentNode.parentNode;
+        height = parseFloat(window.getComputedStyle(msg).height, 10);
+
+        if (event.keyCode == 33) { //pgup
+          msg.scrollTop -= 0.8 * height;
+        } else { //pgdn
+          msg.scrollTop += 0.8 * height;
+        }
+      }
+
+      if (event.keyCode == 114) { //F3
+        if (event.shiftKey) { // shift+f3
+          nextConvSearchResult(doc);
+        } else {
+          if (doc.getElementsByClassName('_3jv8').length == 0) { // search results not open, open them
+              searchConversation(doc);
+          } else {
+            prevConvSearchResult(doc);
+          }
+        }
+      }
+
+      if (event.keyCode == 122) { //F11
+        win.toggleFullscreen();
       }
 
       // Only combinations of the form Ctrl+<key> are accepted
@@ -202,7 +220,11 @@ module.exports = {
               if (event.shiftKey) { // ctrl+shift+g
                 nextConvSearchResult(doc);
               } else {
-                prevConvSearchResult(doc);
+                if (doc.getElementsByClassName('_3jv8').length == 0) { // search results not open
+                    getByAttr(doc, 'a', 'title', 'Choose a gif or sticker').click();
+                } else {
+                  prevConvSearchResult(doc);
+                }
               }
           break;
           case 70:  // F
