@@ -309,16 +309,27 @@ body {
 	background: linear-gradient(rgba(25, 38, 51, .05), #192633);
 }
 
+/* emoji dialog: selected tab */
+._1uwz {
+    background: #3E5269 !important;
+}
+
 /* sticker dialog: selected header */
 ._5r8a._5r8b,
 ._eb3:before {
-	background-color: rgba(255, 255, 255, 0.05);
+	background-color: rgba(255, 255, 255, 0.05) !important;
 }
+
+/* sticker dialog: search */
+ ._55r1 ._58al {
+ 	color: rgba(255, 255, 255, 0.7);
+ }
 
 /* sticker dialog: header borders */
 ._5r8e,
-._5r86 {
-	border-color: rgba(255, 255, 255, 0.05);
+._5r86,
+._37wv {
+	border-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 /* record dialog: time */
@@ -371,9 +382,7 @@ body {
 /* Menus and things */
 ._53ij, ._54nf, ._293j, ._55r1 {
 	background-color: #202C3A !important;
-}
-._5r8a._5r8b {
-	background-color: #222 !important;
+	border-color: rgba(255, 255, 255, 0.05) !important;
 }
 ._2i-c ._54nf ._54nh {
 	color: #ddd !important;
@@ -399,7 +408,7 @@ body {
 
 /* convo info, user list */
 ._4_j5, ._5l37 {
-	background-color: #192633 !important;
+	background-color: #192633;
 }
 ._4_j5 {
 	border-left: none !important;
