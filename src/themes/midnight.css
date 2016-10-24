@@ -137,7 +137,7 @@ body {
 
 /* contact list: person (selected) */
 ._1ht1._1ht2 {
-	background: rgba(255, 255, 255, 0.03) !important;
+	background: rgba(255, 255, 255, 0.05) !important;
 }
 
 /* contact list: person container */
@@ -150,14 +150,26 @@ body {
 	color: rgba(255, 255, 255, 0.7);
 }
 
+/* contact list: person name */
+._1ht3 ._1ht6 {
+	color: rgba(255, 255, 255, 0.9);
+}
+
 /* contact list: message blurb */
-._1htf {
-	color: rgba(255, 255, 255, 0.4);
+._1ht3 ._1htf {
+	color: rgba(255, 255, 255, 0.8);
 }
 
 /* contact list: timestamp */
 ._1ht7 {
 	color: rgba(255, 255, 255, 0.2);
+}
+
+/* contact list: unread */
+._1ht3 {
+  /*background-color: rgba(70, 80, 100, .5) !important;*/
+  background-color: rgba(20, 100, 255, .25) !important;
+  transition: background-color .5s;
 }
 
 /* contact list: timestamp (unread) */
@@ -322,6 +334,45 @@ body {
 }
 
 /* Login button */
-button {
+#loginbutton {
 	background: #192633 !important;
+}
+
+/* Conversation find bar */
+._33p7 {
+	background-color: #202C3A;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* "Done" button and other buttons */
+._3quh {
+  	color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* "Load more" button border */
+._41jf {
+  	border-color: #eee !important;
+}
+
+/* Menus and things */
+._53ij, ._54nf, ._293j, ._55r1 {
+	background-color: #202C3A !important;
+}
+._5r8a._5r8b {
+	background-color: #222 !important;
+}
+._2i-c ._54nf ._54nh {
+	color: #ddd !important;
+}
+._2i-c ._54ne ._54nh, ._2i-c ._54ne ._54nc, ._2i-c ._54ne {
+	background-color: #0066aa !important;
+}
+
+._30yy svg[style] {
+	stroke: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* emoji-only messages */
+._hh7._2f5r, ._-5k ._hh7._2f5r {
+	background-color: transparent !important;
 }
