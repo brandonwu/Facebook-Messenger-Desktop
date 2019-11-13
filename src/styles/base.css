@@ -17,9 +17,91 @@ max-width: 800px;
 
 /* move the info/call/videocall left so close and minimize can fit */
 ._fl2 {
-    right: 80px !important;
+    right: 83px !important;
+    position: absolute !important;
 }
 
 ._4sp8 {
     min-width: 0 !important;
+}
+
+._4kzu {
+    display: inline !important;
+}
+
+/* responsive stuff */
+/* message input when small */
+._7t1o {
+    background-color: transparent !important;
+}
+
+@media(max-width: 900px) and (min-width: 800px) {
+    ._1enh._7q1s {
+        flex-basis: 74px;
+        min-width: 285px !important;
+    }
+
+    ._1ht1 ._1qt3._6-5k {
+        margin-right: 12px;
+    }
+
+    ._1ht5 ._1qt4._7vuo,
+    ._7sta._87u_,
+    ._6-xk ._6-xo,
+    ._6-xv,
+    ._6-xl,
+    ._6ymu {
+        display: flex !important;
+    }
+
+    ._1nq2._7vup {
+        display: block !important;
+    }
+}
+@media(max-width: 800px) and (min-width: 500px) {
+
+    /* hide profile pic */
+    ._41ud {
+        margin-left: 0 !important;
+    }
+
+    /* hide gif/emoji buttons */
+    ._7mkk,
+    ._7mkh {
+        display: none !important;
+    }
+
+    ._1enh._7q1s {
+        flex-basis: 74px;
+        min-width: 185px !important;
+    }
+
+    ._1ht1 ._1qt3._6-5k {
+        display: none !important;
+    }
+
+    ._1ht5 ._1qt4._7vuo,
+    ._7sta._87u_,
+    ._6-xk ._6-xo,
+    ._6-xv,
+    ._6-xl {
+        display: flex !important;
+    }
+
+    ._1nq2._7vup {
+        display: block !important;
+    }
+}
+
+@media(max-width: 500px) {
+    /* hide profile pic */
+    ._41ud {
+        margin-left: 0 !important;
+    }
+
+    /* hide gif/emoji buttons */
+    ._7mkk,
+    ._7mkh {
+        display: none !important;
+    }
 }
